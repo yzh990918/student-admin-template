@@ -8,8 +8,20 @@
       <pipeCharts :sum="courseCount" :pipe-data="pipeData" />
     </div>
     <div v-if="roles[0] === 'admin'" class="info-wrapper">
-      <info />
-      <banner />
+      <info role-text="系统超级管理员" />
+      <div class="options">
+        <banner />
+        <optionsButtons />
+      </div>
+
+    </div>
+    <div v-if="roles[0] === 'teacher'" class="info-wrapper">
+      <TeacherInfo />
+      <div class="options">
+        <banner />
+        <teacherOptionsButtons />
+      </div>
+
     </div>
   </div>
 </template>
@@ -20,9 +32,12 @@ import banner from './components/banner'
 import info from './components/admin/info'
 import lineCharts from './components/lineCharts'
 import pipeCharts from './components/pipe'
+import optionsButtons from './components/option-buttons'
+import teacherOptionsButtons from './components/teacher/option-buttons'
 import { Student } from '@/model/student'
 import { Admin } from '@/model/admin'
 import { mapGetters } from 'vuex'
+import TeacherInfo from './components/teacher/info'
 
 export default {
   name: 'Dashboard',
@@ -30,8 +45,11 @@ export default {
     dataPanel,
     lineCharts,
     pipeCharts,
+    teacherOptionsButtons,
     info,
-    banner
+    banner,
+    optionsButtons,
+    TeacherInfo
   },
   data() {
     return {
@@ -104,6 +122,11 @@ export default {
   .info-wrapper{
     width: 100%;
     display: flex;
+    .options{
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
   }
 }
 </style>

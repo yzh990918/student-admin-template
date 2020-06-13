@@ -5,7 +5,7 @@
     </div>
     <div style="position:relative;">
       <pan-thumb :image="avatar" class="panThumb" />
-      <mallki class-name="mallki-text" text="系统超级管理员" />
+      <mallki class-name="mallki-text" :text="roleText" />
       <div style="padding-top:30px;" class="progress-item">
         <span>Vue</span>
         <el-progress :percentage="80" status="success" />
@@ -47,6 +47,14 @@ export default {
       return statusMap[status]
     }
   },
+  props: {
+    roleText: {
+      type: String,
+      default: '系统超级管理员'
+
+    }
+
+  },
   data() {
     return {
       statisticsData: {
@@ -74,8 +82,8 @@ export default {
 </style>
 <style lang="scss" scoped>
 .box-card-component {
-  width: 400px;
-  max-height: 477px;
+  width: 370px;
+  max-height: 497px;
   .box-card-header {
     position: relative;
     height: 220px;

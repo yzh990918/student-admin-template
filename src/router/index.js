@@ -60,12 +60,6 @@ export const asyncRoutes = [
   },
   // 教师路由分配
   {
-    path: '/teacher/info',
-    name: 'teacherInfo',
-    component: Layout,
-    meta: { title: '教师信息查询', icon: 'teacher', roles: ['teacher'] }
-  },
-  {
     path: '/teacher/student',
     name: 'teacherStudent',
     component: Layout,
