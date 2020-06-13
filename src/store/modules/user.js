@@ -50,10 +50,10 @@ const actions = {
         if (response.code === 200) {
           // 获取信息唯一凭证
           const uid = response.data.userInfo.sno ? response.data.userInfo.sno : response.data.userInfo.tno ? response.data.userInfo.tno : response.data.userInfo.id
-          console.log(uid)
           // 设置vuex数据和保存cookie
           commit('SET_TOKEN', response.data.token)
           commit('SET_UID', uid)
+          localStorage.setItem('uid', uid)
           setToken(response.data.token)
           resolve()
         } else {
@@ -73,7 +73,7 @@ const actions = {
   getInfo({ commit, state }) {
     return new Promise((resolve, reject) => {
       // 携带token信息请求用户信息
-      getInfo(state.token, state.uid).then(response => {
+      getInfo(state.token, localStorage.getItem('uid')).then(response => {
         const { data } = response
         const roles = data.roles
         const name = data.roles[0] === 'admin' ? data.userInfo.username : data.userInfo.name

@@ -15,12 +15,6 @@ import '@/permission' // permission control
 // }
 // Vue.use(ElementUI, { locale })
 // 如果想要中文版 element-ui，按如下方式声明
-import VueMarkdownEditor from '@kangc/v-md-editor'
-import '@kangc/v-md-editor/lib/style/base-editor.css'
-import vuepressTheme from '@kangc/v-md-editor/lib/theme/vuepress.js'
-VueMarkdownEditor.use(vuepressTheme)
-Vue.use(VueMarkdownEditor)
-
 Vue.use(ElementUI)
 Vue.config.productionTip = false
 new Vue({
