@@ -32,6 +32,24 @@ export const constantRoutes = [
       name: 'Dashboard',
       component: () => import('@/views/dashboard/index'),
       meta: { title: '首页', icon: 'dashboard' }
+    },
+    {
+      path: 'teacher/student/score/detail',
+      component: () => import('@/views/teacher/score/score-detail'),
+      meta: { title: '成绩详情' },
+      hidden: true
+    }
+    ]
+  },
+  {
+    path: '/chat',
+    name: 'chat',
+    component: Layout,
+    children: [{
+      path: '',
+      name: 'chat',
+      component: () => import('@/views/chat/index'),
+      meta: { title: '在线交流平台', icon: 'wechat' }
     }]
   }
 ]
@@ -140,12 +158,7 @@ export const asyncRoutes = [
       }
     ]
   },
-  {
-    path: '/chat',
-    name: 'chat',
-    component: Layout,
-    meta: { title: '在线交流系统', icon: 'wechat' }
-  },
+
   { path: '*', redirect: '/404', hidden: true }
 ]
 

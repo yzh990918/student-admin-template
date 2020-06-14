@@ -20,29 +20,29 @@
             <span style="color:#409EFF;font-size:17px;font-weight:500">{{ scope.row.cno }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="课程名" prop="course_detail[0].name" align="center" width="130">
+        <el-table-column label="课程名" prop="courseName" align="center" width="130">
           <template slot-scope="scope">
-            <span>{{ scope.row.course_detail[0].name }}</span>
+            <span>{{ scope.row.courseName }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="学分" prop="course_detail[0].credit" align="center" width="100">
+        <el-table-column label="学分" prop="credit" align="center" width="100">
           <template slot-scope="scope">
-            <span style="color:#E6A23C;font-size:17px;font-weight:500">{{ scope.row.course_detail[0].credit }}</span>
+            <span style="color:#E6A23C;font-size:17px;font-weight:500">{{ scope.row.credit }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="学期" prop="course_detail[0].term" align="center" width="150">
+        <el-table-column label="学期" prop="term" align="center" width="150">
           <template slot-scope="scope">
-            <span>{{ scope.row.course_detail[0].term }}</span>
+            <span>{{ scope.row.term }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="学时" prop="course_detail[0].period" align="center" width="100">
+        <el-table-column label="学时" prop="period" align="center" width="100">
           <template slot-scope="scope">
-            <span style="color:#67C23A;font-size:17px;font-weight:500">{{ scope.row.course_detail[0].period }}</span>
+            <span style="color:#67C23A;font-size:17px;font-weight:500">{{ scope.row.period }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="封面图" prop="course_detail[0].img" align="center" width="199">
+        <el-table-column label="封面图" prop="img" align="center" width="199">
           <template slot-scope="scope">
-            <img width="80px" height="80px" :src="scope.row.course_detail[0].img" alt="">
+            <img width="80px" height="80px" :src="scope.row.img" alt="">
           </template>
         </el-table-column>
         <el-table-column label="成绩" prop="score" align="center" width="100">
@@ -66,18 +66,6 @@
         </el-table-column>
       </el-table>
     </div>
-    <!-- <div class="pagination">
-      <el-pagination
-         current-page="1"
-        :background="true"
-        :page-sizes="[15,20,30,40]"
-        :page-size="15"
-        layout="total, sizes, prev, pager, next, jumper"
-        :total="400"
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-      />
-    </div>-->
 
   </div>
 </template>
@@ -120,7 +108,7 @@ export default {
   import('@/vendor/export2Excel').then(excel => {
     // 表头
     const tHeader = ['课程编号', '课程名', '学分', '学期', '学时', '成绩']
-    const filterVal = ['cno', 'name', 'credit', 'term', 'period', 'score']
+    const filterVal = ['cno', 'courseName', 'credit', 'term', 'period', 'score']
     const data = this.formatJson(filterVal, this.list)
     excel.export_json_to_excel({
       header: tHeader,
@@ -132,21 +120,16 @@ export default {
     },
     async initData() {
       this.listLoading = true
-      const res = await Student.getScoreList(this.userInfo.sno)
+      const res = await Student.getScoreDistribute(this.userInfo.sno)
       if (res.code === 200) {
-        this.list = res.data.course_list
+        this.list = res.data.scoreData
         this.listLoading = false
       }
     },
     formatJson(filterval, data) {
       // 遍历json数据
       return data.map(v => filterval.map(item => {
-        if (item === 'cno' || item === 'score') {
-          return v[item]
-        } else {
-          const course_detail = v.course_detail[0]
-          return course_detail[item]
-        }
+        return v[item]
       }))
     }
   }

@@ -29,7 +29,7 @@
     </el-card>
     <div class="course-info">
       <el-table
-        :data="userInfo.course_list"
+        :data="list"
         fit
         highlight-current-row
         style="box-sizing:border-box;width: 100%;padding-top:15px;margin-left:40px; box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);"
@@ -42,23 +42,23 @@
         </el-table-column>
         <el-table-column label="课程名" prop="cno" align="center" min-width="200">
           <template slot-scope="scope">
-            <span style="color:#606266;font-size:16px;line-height:23px;font-weight:500">{{ scope.row.course_detail[0].name }}</span>
+            <span style="color:#606266;font-size:16px;line-height:23px;font-weight:500">{{ scope.row.courseName }}</span>
           </template>
         </el-table-column>
         <el-table-column label="学分" prop="cno" align="center" width="90">
           <template slot-scope="scope">
-            <span style="color:#409EFF;font-size:17px;font-weight:500">{{ scope.row.course_detail[0].credit }}</span>
+            <span style="color:#409EFF;font-size:17px;font-weight:500">{{ scope.row.credit }}</span>
           </template>
         </el-table-column>
         <el-table-column label="学时" prop="cno" align="center" width="90">
           <template slot-scope="scope">
-            <span style="color:#909399;font-size:17px;font-weight:500">{{ scope.row.course_detail[0].period }}</span>
+            <span style="color:#909399;font-size:17px;font-weight:500">{{ scope.row.period }}</span>
           </template>
         </el-table-column>
         <el-table-column label="学期" align="center" width="200">
           <template slot-scope="{row}">
-            <el-tag v-if="row.course_detail[0].term !== '第二学期'" type="danger">{{ row.course_detail[0].term }}</el-tag>
-            <el-tag v-if=" row.course_detail[0].term=== '第二学期'" type="success">{{ row.course_detail[0].term }}</el-tag>
+            <el-tag v-if="row.term !== '第二学期'" type="danger">{{ row.term }}</el-tag>
+            <el-tag v-if=" row.term=== '第二学期'" type="success">{{ row.term }}</el-tag>
           </template>
         </el-table-column>
       </el-table>
@@ -67,6 +67,7 @@
 </template>
 
 <script>
+import { Student } from '@/model/student'
 import panthumb from '@/components/PanThumb'
 import Mallki from '@/components/TextHoverEffect/Mallki'
 import { mapGetters } from 'vuex'
@@ -80,6 +81,7 @@ export default {
   props: {},
   data() {
     return {
+      list: []
 
     }
   },
@@ -96,9 +98,20 @@ export default {
 
   beforeMount() {},
 
-  mounted() {},
+  mounted() {
+    this.initData()
+  },
 
-  methods: {}
+  methods: {
+    async initData() {
+      this.listLoading = true
+      const res = await Student.getScoreDistribute(this.userInfo.sno)
+      if (res.code === 200) {
+        this.list = res.data.scoreData
+        this.listLoading = false
+      }
+    }
+  }
 
 }
 

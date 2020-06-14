@@ -48,6 +48,11 @@ class Student {
   static async searchKeyword(keywrod, page, size) {
     return await axios.get(`/student/search?keyword=${keywrod}&page=${page}&size=${size}`)
   }
+
+  // 传入成绩id 删除成绩
+  static async deleteScore(id) {
+    return await axios.post(`/student/score/delete?id=${id}`)
+  }
 }
 export {
   Student
