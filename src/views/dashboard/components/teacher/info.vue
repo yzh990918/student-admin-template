@@ -13,13 +13,13 @@
           <i class="el-icon-school" />
           <span style="color:#606266;font-weight:600;font-size:17px;">学院:</span><span>{{ userInfo.college }}</span>
         </div>
-        <div class="subject">
-          <i class="el-icon-date" />
-          <span style="color:#606266;font-weight:600;font-size:17px;">专业:</span><span>{{ userInfo.subject }}</span>
-        </div>
         <div class="mobile">
           <i class="el-icon-coordinate" />
           <span style="color:#606266;font-weight:600;font-size:17px;">任教:</span><span>{{ userInfo.job }}</span>
+        </div>
+        <div class="subject">
+          <i class="el-icon-notebook-1" />
+          <span style="color:#606266;font-weight:600;font-size:17px;">个人简介:</span><span>很懒,什么都没留下 </span>
         </div>
       </div>
     </el-card>

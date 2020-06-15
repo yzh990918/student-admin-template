@@ -39,6 +39,10 @@
           <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
         </span>
       </el-form-item>
+      <div class="options">
+        <el-link type="primary" @click="toTeacherRegister">教师注册</el-link>
+        <el-link type="primary" @click="toStudentRegister">学生注册</el-link>
+      </div>
       <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">登录</el-button>
     </el-form>
   </div>
@@ -90,6 +94,12 @@ export default {
       this.$nextTick(() => {
         this.$refs.password.focus()
       })
+    },
+    toTeacherRegister() {
+      this.$router.push(`/register?type=2`)
+    },
+    toStudentRegister() {
+      this.$router.push('/register?type=1')
     },
     handleLogin() {
       this.$refs.loginForm.validate(valid => {
@@ -220,6 +230,11 @@ $light_gray:#eee;
     color: $dark_gray;
     cursor: pointer;
     user-select: none;
+  }
+  .options{
+    display: flex;
+    justify-content: space-between;
+    padding: 0 5px 10px 5px;
   }
 }
 </style>

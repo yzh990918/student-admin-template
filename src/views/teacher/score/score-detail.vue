@@ -60,6 +60,13 @@
         </template>
       </el-table-column>
     </el-table>
+    <el-dialog title="请输入修改的成绩" width="40%" :visible.sync="dialogFormVisible" :show-close="true">
+      <el-input v-model="scores" placeholder="成绩" />
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogFormVisible = false">取 消</el-button>
+        <el-button type="primary" @click="modifyInfo">确 定</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -72,6 +79,9 @@ export default {
   data() {
     return {
       list: [],
+      dialogFormVisible: false,
+      scores: 0,
+      options: {},
       listLoading: true
     }
   },
@@ -119,6 +129,26 @@ export default {
           message: '已取消删除'
         })
       })
+    },
+    // 修改
+    confirmEdit(row) {
+      this.dialogFormVisible = true
+      this.scores = row.score
+      this.options = {
+        sno: Number(this.$route.query.sno),
+        cno: row.cno
+      }
+    },
+    async modifyInfo() {
+      this.options['score'] = this.scores
+      const res = await Student.modifyScore(this.options)
+      if (res.code === 200) {
+        this.dialogFormVisible = false
+        this.$message.success('修改成功')
+        this.initScore()
+      } else {
+        this.$message.error(res.msg)
+      }
     }
   }
 

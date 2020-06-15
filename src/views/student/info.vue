@@ -10,6 +10,14 @@
       </div>
       <div class="subtitle">
         <div class="college">
+          <i class="el-icon-collection-tag" />
+          <span style="color:#606266;font-weight:600;font-size:17px;">学号:</span><span>{{ userInfo.sno }}</span>
+        </div>
+        <div class="college">
+          <i class="el-icon-user" />
+          <span style="color:#606266;font-weight:600;font-size:17px;">用户名:</span><span>{{ userInfo.username }}</span>
+        </div>
+        <div class="college">
           <i class="el-icon-school" />
           <span style="color:#606266;font-weight:600;font-size:17px;">学院:</span><span>{{ userInfo.college }}</span>
         </div>
@@ -129,7 +137,7 @@ export default {
     display: flex;
     background: #ffffff;
     width:350px;
-    max-height: 600px;
+    max-height: 660px;
     flex-direction: column;
     .header{
       width: 100%;

@@ -10,7 +10,7 @@ import getPageTitle from '@/utils/get-page-title'
 
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
-const whiteList = ['/login', 'register'] // 路由白名单，不会重定向
+const whiteList = ['/login', '/register'] // 路由白名单，不会重定向
 
 // 全局路由守卫
 router.beforeEach(async(to, from, next) => {
