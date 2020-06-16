@@ -46,6 +46,11 @@ class Admin {
   static async deleteTeacher(id) {
     return await axios.post(`/teacher/delete?id=${id}`)
   }
+
+  // 获取教师密码
+  static async getPassword(name) {
+    return await axios.post(`/teacher/getPassword?name=${name}`)
+  }
 }
 
 export {

@@ -4,76 +4,81 @@
       ref="form"
       label-position="left"
       :rules="rules"
-      :model="userInfo"
+      :model="teacherInfo"
+      style="margin-left:30px;"
       label-width="80px"
     >
-      <el-form-item label="姓名" prop="name">
-        <el-input v-model="userInfo.name" style="width:430px;height:40px" placeholder="姓名" />
+      <el-form-item label="教师编号" prop="tno">
+        <el-input v-model="teacherInfo.tno" style="width:430px;height:40px" placeholder="教师编号" />
       </el-form-item>
-      <el-form-item label="用户名" prop="username">
-        <el-input v-model="userInfo.username" style="width:430px;height:40px" placeholder="用户名" />
+      <el-form-item label="姓名" prop="name">
+        <el-input v-model="teacherInfo.name" style="width:430px;height:40px" placeholder="姓名" />
       </el-form-item>
       <el-form-item label="密码" prop="password">
-        <el-input v-model="userInfo.password" style="width:430px;height:40px" placeholder="密码" />
+        <el-input v-model="teacherInfo.password" show-password style="width:430px;height:40px" placeholder="密码" />
       </el-form-item>
-      <el-form-item label="手机号码" prop="mobile">
-        <el-input v-model="userInfo.mobile" style="width:430px;height:40px" placeholder="手机号" />
+      <el-form-item label="头像">
+        <el-image
+          v-if="img!==''"
+          :preview-src-list="srcList"
+          :src="teacherInfo.avatar"
+          class="avatar"
+          @click="handlePreview"
+        />
+        <el-upload
+          class="avatar-uploader"
+          action="https://imgkr.com/api/files/upload"
+          :show-file-list="false"
+          :on-success="handleAvatarSuccess"
+          :before-upload="beforeAvatarUpload"
+        >
+          <el-button slot="trigger" style="width:258px;margin-top:10px;" size="medium" type="primary">上传图片</el-button>
+        </el-upload>
       </el-form-item>
-      <el-form-item label="家庭住址" prop="address">
-        <el-input v-model="userInfo.address" style="width:430px;height:40px" placeholder="家庭住址" />
+      <el-form-item label="性别" prop="gender">
+        <el-select v-model="teacherInfo.gender" placeholder="请选择性别">
+          <el-option v-for="(item,index) of genderOptions" :key="index" :label="item.label" :value="item.value" />
+        </el-select>
       </el-form-item>
-      <el-form-item label="性别" style="margin-top:20px;">
-        <el-select v-model="userInfo.gender" style="width:430px;height:40px" placeholder="选择性别">
+      <el-form-item label="职教课程">
+        <el-select v-model="teacherInfo.cno" prop="cno" style="width:430px;height:40px" placeholder="选择课程">
           <el-option
-            v-for="item in genderOptions"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value"
+            v-for="item in courseOptions"
+            :key="item.name"
+            :label="item.name"
+            :value="item.cno"
           />
         </el-select>
       </el-form-item>
-      <el-form-item label="学院">
-        <el-select v-model="userInfo.college" style="width:430px;height:40px" placeholder="选择学院">
-          <el-option
-            v-for="item in collegeOptions"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value"
-          />
-        </el-select>
-      </el-form-item>
-      <el-form-item label="专业">
-        <el-select v-model="userInfo.subject" style="width:430px;height:40px" placeholder="选择专业">
-          <el-option
-            v-for="item in subjectOptions"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value"
-          />
-        </el-select>
-        <el-form-item style="margin-top:30px!important">
-          <el-button style="width:430px;height:45px;" type="primary" plain @click="submit">确认添加</el-button>
-        </el-form-item>
+      <el-form-item label="">
+        <el-button type="primary" style="width:400px" @click="submit">确认添加</el-button>
       </el-form-item>
     </el-form>
   </div>
 </template>
 
 <script>
-import { collegeOptions, subjectOptions, genderOptions } from '@/config/enum'
-import { Student } from '@/model/student'
+import { Admin } from '@/model/admin'
+import { Teacher } from '@/model/teacher'
 export default {
   name: '',
   components: {},
   props: {},
   data() {
     return {
-      userInfo: {
+      teacherInfo: {
       },
-      genderOptions: genderOptions,
-      collegeOptions: collegeOptions,
-      subjectOptions: subjectOptions,
+      img: '',
+      srcList: [],
+      courseOptions: [],
       showImagePreview: false,
+      genderOptions: [{
+        label: '男',
+        value: 0
+      }, {
+        label: '女',
+        value: 1
+      }],
       rules: {
         id: { required: true },
         name: [
@@ -123,22 +128,53 @@ export default {
 
   beforeMount() {},
 
-  mounted() {},
+  mounted() {
+    this.initCourseData()
+  },
 
   methods: {
+    async initCourseData() {
+      const courseData = await Admin.getCourseList(0, 100)
+      if (courseData.code === 200) {
+        this.courseOptions = courseData.data.items
+      } else {
+        this.$message.error(courseData.msg)
+      }
+    },
 
     submit() {
       this.$refs.form.validate(async(valid) => {
         if (valid) {
-          const res = await Student.register(this.userInfo)
+          const res = await Teacher.register(this.teacherInfo)
           if (res.code === 200) {
             this.$message.success('添加成功')
-            this.userInfo = {}
+            this.teacherInfo = {}
+            this.img = ''
           } else {
             this.$message.error(res.msg)
           }
         }
       })
+    },
+    // 用户头像处理
+    handleAvatarSuccess(res, file) {
+      this.teacherInfo.avatar = res.data
+      this.img = res.data
+    },
+    beforeAvatarUpload(file) {
+      const formatType = file.type === 'image/jpeg' || 'image/png'
+      const isLt2M = file.size / 1024 / 1024 < 2
+
+      if (!formatType) {
+        this.$message.error('上传头像图片只能是 JPG或者PNG 格式!')
+      }
+      if (!isLt2M) {
+        this.$message.error('上传头像图片大小不能超过 2MB!')
+      }
+      return formatType && isLt2M
+    },
+    handlePreview() {
+      this.srcList = [this.teacherInfo.avatar]
     }
 
   }
@@ -150,6 +186,7 @@ export default {
 .container{
   display: flex;
   justify-content: flex-start;
+  padding: 32px;
   margin-left: 50px;
 }
 .avatar-uploader .el-upload {
