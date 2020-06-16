@@ -17,10 +17,45 @@
 
 ## 部分截图
 
-<p style="font-size:20px;font-weight:500;">登录</p>
+<p style="font-size:20px;font-weight:500;">角色登录</p>
 
 ![](https://image.yangxiansheng.top/img/20200611002243.png?imagelist)
 
+<p style="font-size:20px;font-weight:500;">角色注册</p>
+
+![](https://image.yangxiansheng.top/img/20200616131849.png?imagelist)
+
+<p style="font-size:20px;font-weight:500;">学生成绩分析</p>
+
+![](https://image.yangxiansheng.top/img/20200616131914.png?imagelist)
+
+<p style="font-size:20px;font-weight:500;">学生信息查询</p>
+
+![](https://image.yangxiansheng.top/img/20200616131931.png?imagelist)
+
+<p style="font-size:20px;font-weight:500;">学生成绩查询</p>
+
+![](https://image.yangxiansheng.top/img/20200611002243.png?imagelist)
+
+<p style="font-size:20px;font-weight:500;">首页</p>
+
+![](https://image.yangxiansheng.top/img/20200616132009.png?imagelist)
+
+<p style="font-size:20px;font-weight:500;">学生信息管理</p>
+
+![](https://image.yangxiansheng.top/img/20200616132026.png?imagelist)
+
+<p style="font-size:20px;font-weight:500;">学生成绩管理</p>
+
+![](https://image.yangxiansheng.top/img/20200616132105.png?imagelist)
+
+<p style="font-size:20px;font-weight:500;">课程管理</p>
+
+![](https://image.yangxiansheng.top/img/20200616132129.png?imagelist)
+
+<p style="font-size:20px;font-weight:500;">教师信息管理</p>
+
+![](https://image.yangxiansheng.top/img/20200616132142.png?imagelist)
 
 ## Feature
 

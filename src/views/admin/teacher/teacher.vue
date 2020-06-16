@@ -236,16 +236,18 @@ export default {
       const jobData = await Teacher.getCourseDetail(this.teacherInfo.cno)
       this.teacherInfo['job'] = jobData.data[0].name
       this.$refs.form.validate(async(valid) => {
-        const res = await Admin.modifyTeacher(this.teacherInfo)
-        if (res.code === 200) {
-          this.$message.success('修改成功')
-          this.dialogFormVisible = false
-          this.teacherInfo = {}
-          this.initData()
-        } else {
-          this.$message.error(res.msg)
-          this.teacherInfo = {}
-          this.dialogFormVisible = false
+        if (valid) {
+          const res = await Admin.modifyTeacher(this.teacherInfo)
+          if (res.code === 200) {
+            this.$message.success('修改成功')
+            this.dialogFormVisible = false
+            this.teacherInfo = {}
+            this.initData()
+          } else {
+            this.$message.error(res.msg)
+            this.teacherInfo = {}
+            this.dialogFormVisible = false
+          }
         }
       })
     },

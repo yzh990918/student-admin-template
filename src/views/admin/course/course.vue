@@ -191,16 +191,18 @@ export default {
     // 修改
     async modifyInfo() {
       this.$refs.form.validate(async(valid) => {
-        const res = await Admin.modifycourse(this.courseInfo)
-        if (res.code === 200) {
-          this.$message.success('修改成功')
-          this.dialogFormVisible = false
-          this.courseInfo = {}
-          this.initData()
-        } else {
-          this.$message.error(res.msg)
-          this.courseInfo = {}
-          this.dialogFormVisible = false
+        if (valid) {
+          const res = await Admin.modifycourse(this.courseInfo)
+          if (res.code === 200) {
+            this.$message.success('修改成功')
+            this.dialogFormVisible = false
+            this.courseInfo = {}
+            this.initData()
+          } else {
+            this.$message.error(res.msg)
+            this.courseInfo = {}
+            this.dialogFormVisible = false
+          }
         }
       })
     },

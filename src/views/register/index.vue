@@ -281,25 +281,27 @@ export default {
     },
     async onSubmit() {
       this.$refs.form.validate(async valid => {
-        const jobData = await Teacher.getCourseDetail(this.userInfo.cno)
-        this.userInfo['job'] = jobData.data[0].name
-        if (this.type === 1 || this.type === 2) {
-          let res
-          if (this.type === 1) {
-            res = await Student.register(this.userInfo)
-          } else {
-            res = await Teacher.register(this.userInfo)
-          }
-          if (res.code === 200) {
-            this.$notify({
-              title: '注册成功',
-              message: '👽👽👽👽👽👽👽👽👽👽👽👽 ',
-              type: 'success'
-            })
-            this.userInfo = {}
-            this.$router.push('/login')
-          } else {
-            this.$message.error(res.msg)
+        if (valid) {
+          if (this.type === 1 || this.type === 2) {
+            const jobData = await Teacher.getCourseDetail(this.userInfo.cno)
+            this.userInfo['job'] = jobData.data[0].name
+            let res
+            if (this.type === 1) {
+              res = await Student.register(this.userInfo)
+            } else {
+              res = await Teacher.register(this.userInfo)
+            }
+            if (res.code === 200) {
+              this.$notify({
+                title: '注册成功',
+                message: '👽👽👽👽👽👽👽👽👽👽👽👽 ',
+                type: 'success'
+              })
+              this.userInfo = {}
+              this.$router.push('/login')
+            } else {
+              this.$message.error(res.msg)
+            }
           }
         }
       })
