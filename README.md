@@ -39,7 +39,7 @@
 
 <p style="font-size:20px;font-weight:500;">首页</p>
 
-![](https://image.yangxiansheng.top/img/20200616132009.png?imagelist)
+![](https://image.yangxiansheng.top/img/20200616133520.png?imagelist)
 
 <p style="font-size:20px;font-weight:500;">学生信息管理</p>
 
