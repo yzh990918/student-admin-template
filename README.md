@@ -43,7 +43,7 @@
 
 <p style="font-size:20px;font-weight:500;">学生信息管理</p>
 
-![](https://image.yangxiansheng.top/img/20200616132026.png?imagelist)
+![](https://image.yangxiansheng.top/img/20200616133320.png?imagelist)
 
 <p style="font-size:20px;font-weight:500;">学生成绩管理</p>
 
