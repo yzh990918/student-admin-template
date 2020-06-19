@@ -50,6 +50,16 @@
           />
         </el-select>
       </el-form-item>
+      <el-form-item label="学院">
+        <el-select v-model="teacherInfo.college" prop="cno" style="width:430px;height:40px" placeholder="选择课程">
+          <el-option
+            v-for="item in collegeOptions"
+            :key="item.name"
+            :label="item.label"
+            :value="item.value"
+          />
+        </el-select>
+      </el-form-item>
       <el-form-item label="">
         <el-button type="primary" style="width:400px" @click="submit">确认添加</el-button>
       </el-form-item>
@@ -60,6 +70,7 @@
 <script>
 import { Admin } from '@/model/admin'
 import { Teacher } from '@/model/teacher'
+import { collegeOptions } from '@/config/enum'
 export default {
   name: '',
   components: {},
@@ -68,6 +79,7 @@ export default {
     return {
       teacherInfo: {
       },
+      collegeOptions: collegeOptions,
       img: '',
       srcList: [],
       courseOptions: [],
@@ -145,6 +157,8 @@ export default {
     submit() {
       this.$refs.form.validate(async(valid) => {
         if (valid) {
+          const jobData = await Teacher.getCourseDetail(this.teacherInfo.cno)
+          this.teacherInfo['job'] = jobData.data[0].name
           const res = await Teacher.register(this.teacherInfo)
           if (res.code === 200) {
             this.$message.success('添加成功')
