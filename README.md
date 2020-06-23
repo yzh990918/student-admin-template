@@ -4,6 +4,13 @@
   <img width="100%" height="400" src="https://image.yangxiansheng.top/img/d1d7b033-d75e-4cd6-ae39-fcd5f1c0a7c5.jpg?imagelist"/>
   </p>
 
+> 在线体验地址:[线上地址](http://student-admin.yangxiansheng.top/) 教师体验账号:墨痕 12345,管理员体验账号:admin 12345 学生体验账号:251205668@qq.com 12345
+
+> ！！！！ 不要乱删数据
+
+> ！！！！ 不要乱删数据
+
+> ！！！！ 不要乱删数据
 
 
 ## 前端技术
