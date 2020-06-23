@@ -7,16 +7,12 @@ const server = http.createServer()
 
 const group = {} // 记录每个房间号的人数
 
-// 多聊天室功能
 // roomid -> 对应相同的roomid进行广播消息
 wss.on('connection', function connection(ws) {
   // ws代表当前收到消息的客户端
-
   // 接收客户端消息
   ws.on('message', function(msg) {
-    // console.log(msg)
     const msgObj = JSON.parse(msg)
-
     if (msgObj.event === 'enter') {
       // 用户信息
       ws.name = msgObj.name
@@ -29,7 +25,7 @@ wss.on('connection', function connection(ws) {
         group[ws.roomid] += 1
       }
     }
-    // 广播消息(即获取所有的客户端)
+    // 接收到信息后 发送广播消息(即获取所有的客户端)
     wss.clients.forEach(client => {
       // 补充：如何判断非自己的客户端：ws !== client
       if (client.readyState === WebSocket.OPEN && client.roomid === ws.roomid) {
