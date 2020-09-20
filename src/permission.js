@@ -26,7 +26,7 @@ router.beforeEach(async(to, from, next) => {
       next({ path: '/' })
       NProgress.done()
     } else {
-      // 不是login 首先角色,根据角色去获取动态路由,每次访问用replace访问
+      // 不是login 判断角色,根据角色去获取动态路由,每次访问用replace访问
       const hasRoles = store.getters.roles && store.getters.roles.length > 0
       if (hasRoles) {
         next()
@@ -37,7 +37,7 @@ router.beforeEach(async(to, from, next) => {
           // 生成动态路由
           const accessRoutes = await store.dispatch('permission/generateRoutes', roles)
           router.addRoutes(accessRoutes)
-          //  使用 replace 访问路由，不会在 history 中留下记录
+          //  使用 replace 访问路由，不会在 history 中留下记录，登录到dashbord时回退空白页面
           next({ ...to, replace: true })
         } catch (error) {
           // remove token and go to login page to re-login

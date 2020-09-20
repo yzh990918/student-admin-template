@@ -22,6 +22,7 @@ export function filterAsyncRoutes(routes, roles) {
   const res = []
 
   routes.forEach(route => {
+    // 浅拷贝
     const tmp = { ...route }
     if (hasPermission(roles, tmp)) {
       if (tmp.children) {
@@ -49,10 +50,12 @@ const mutations = {
 const actions = {
   generateRoutes({ commit }, roles) {
     return new Promise(resolve => {
+      //   debugger
       let accessedRoutes
       if (roles.includes('admin')) {
         accessedRoutes = asyncRoutes || []
       } else {
+      // 不是admin 去遍历生成对应的权限路由表
         accessedRoutes = filterAsyncRoutes(asyncRoutes, roles)
       }
       commit('SET_ROUTES', accessedRoutes)
