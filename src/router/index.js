@@ -19,11 +19,6 @@ export const constantRoutes = [
   },
 
   {
-    path: '/404',
-    component: () => import('@/views/404'),
-    hidden: true
-  },
-  {
     path: '/',
     component: Layout,
     redirect: '/dashboard',
@@ -51,6 +46,11 @@ export const constantRoutes = [
       component: () => import('@/views/chat/index'),
       meta: { title: '在线交流平台', icon: 'wechat' }
     }]
+  },
+  {
+    path: '/404',
+    component: () => import('@/views/404'),
+    hidden: true
   }
 ]
 // 权限控制路由
