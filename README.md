@@ -22,6 +22,10 @@
 - koa
 - axios
 
+**本文章对应教程**
+
+[浅析 vue-router 源码和动态路由权限分配](https://juejin.im/post/6882539694170013710)
+
 ## 部分截图
 
 <p style="font-size:20px;font-weight:500;">角色登录</p>
