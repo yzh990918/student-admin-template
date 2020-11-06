@@ -4,9 +4,9 @@
   <img width="100%" height="400" src="https://image.yangxiansheng.top/img/d1d7b033-d75e-4cd6-ae39-fcd5f1c0a7c5.jpg?imagelist"/>
   </p>
   
-> 由于部分同学乱删数据,所以体验账号失效,需要看到效果的同学可以注册账号体验，再三强调数据不要乱删啊，我这边没做CMS，直接操作数据库会很繁琐
+> 由于部分同学乱删数据,所以体验账号失效,需要看到效果的同学可以注册账号体验，再三强调数据不要乱删啊
 
-> 在线体验地址:[线上地址](http://student-admin.yangxiansheng.top/) 教师体验账号:墨痕 12345,管理员体验账号:admin 12345 学生体验账号:251205668@qq.com 12345
+> 在线体验地址:[线上地址](http://student-admin.yangxiansheng.top/) 管理员体验账号:admin 12345 学生和教师自行注册
 
 > ！！！！ 不要乱删数据
 
@@ -24,10 +24,6 @@
 - socket.io
 - koa
 - axios
-
-**项目对应教程**
-
-[浅析 vue-router 源码和动态路由权限分配](https://juejin.im/post/6882539694170013710)
 
 ## 部分截图
 
