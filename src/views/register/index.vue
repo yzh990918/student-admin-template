@@ -283,12 +283,13 @@ export default {
       this.$refs.form.validate(async valid => {
         if (valid) {
           if (this.type === 1 || this.type === 2) {
-            const jobData = await Teacher.getCourseDetail(this.userInfo.cno)
-            this.userInfo['job'] = jobData.data[0].name
+            console.log(1)
             let res
             if (this.type === 1) {
               res = await Student.register(this.userInfo)
             } else {
+            // const jobData = await Teacher.getCourseDetail(this.userInfo.cno)
+            // this.userInfo['job'] = jobData.data[0].name
               res = await Teacher.register(this.userInfo)
             }
             if (res.code === 200) {
