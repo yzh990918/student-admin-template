@@ -25,6 +25,10 @@
 - koa
 - axios
 
+## 鸟瞰图
+
+![](https://image.yangxiansheng.top/img/20201216120540.png?imglist)
+
 ## 部分截图
 
 <p style="font-size:20px;font-weight:500;">角色登录</p>
