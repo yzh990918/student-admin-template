@@ -25,6 +25,11 @@
 - koa
 - axios
 
+
+## 后台地址和接口文档
+
+- [后台地址](https://github.com/251205668/student-admin)
+- [接口文档](https://documenter.getpostman.com/view/10611320/T17Ge7JB?version=latest)
 ## 鸟瞰图
 
 ![](https://image.yangxiansheng.top/img/20201216120540.png?imglist)
