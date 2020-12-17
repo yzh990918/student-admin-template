@@ -43,7 +43,7 @@
         <el-link type="primary" @click="toTeacherRegister">教师注册</el-link>
         <el-link type="primary" @click="toStudentRegister">学生注册</el-link>
       </div>
-      <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">登录</el-button>
+      <el-button type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">登录</el-button>
     </el-form>
   </div>
 </template>
@@ -104,19 +104,21 @@ export default {
     handleLogin() {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
-          this.loading = true
+          // this.loading = true
           // 提交action 并请求服务端数据 返回promise对象
           this.$store.dispatch('user/login', this.loginForm).then(() => {
             // 路由重定向 跳转首页
             this.$router.push({ path: this.redirect || '/' })
-            this.loading = false
+            // this.loading = false
             this.$message.success('登录成功')
           }).catch(() => {
-            this.loading = false
+            // this.loading = false
           })
         } else {
+          // this.loading = false
           return false
         }
+        console.log(this.loading)
       })
     }
   }

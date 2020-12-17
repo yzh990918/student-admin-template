@@ -3,14 +3,17 @@
 <p text-aligin="center">
   <img width="100%" height="400" src="https://image.yangxiansheng.top/img/d1d7b033-d75e-4cd6-ae39-fcd5f1c0a7c5.jpg?imagelist"/>
   </p>
+  
+> 由于部分同学乱删数据,所以体验账号失效,需要看到效果的同学可以注册账号体验，再三强调数据不要乱删啊
 
-> 在线体验地址:[线上地址](http://student-admin.yangxiansheng.top/) 教师体验账号:墨痕 12345,管理员体验账号:admin 12345 学生体验账号:251205668@qq.com 12345
+> 在线体验地址:[线上地址](http://student-admin.yangxiansheng.top/) 管理员体验账号:admin 12345 学生和教师自行注册
+
+> ！！！！ 不要乱删数据
 
 > ！！！！ 不要乱删数据
 
 > ！！！！ 不要乱删数据
 
-> ！！！！ 不要乱删数据
 
 
 ## 前端技术
@@ -21,6 +24,15 @@
 - socket.io
 - koa
 - axios
+
+
+## 后台地址和接口文档
+
+- [后台地址](https://github.com/251205668/student-admin)
+- [接口文档](https://documenter.getpostman.com/view/10611320/T17Ge7JB?version=latest)
+## 鸟瞰图
+
+![](https://image.yangxiansheng.top/img/20201216120540.png?imglist)
 
 ## 部分截图
 
