@@ -158,6 +158,26 @@ export const asyncRoutes = [
       }
     ]
   },
+  {
+    'path': 'external-link',
+    'component': Layout,
+    'children': [
+      {
+        'path': 'https://github.com/251205668/student-admin-template',
+        'meta': { 'title': '项目地址', 'icon': 'guide' }
+      }
+    ]
+  },
+  {
+    'path': 'external-link',
+    'component': Layout,
+    'children': [
+      {
+        'path': 'https://documenter.getpostman.com/view/10611320/T17Ge7JB?version=latest',
+        'meta': { 'title': '接口文档', 'icon': 'skill' }
+      }
+    ]
+  },
 
   { path: '*', redirect: '/404', hidden: true }
 ]

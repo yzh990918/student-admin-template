@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <el-alert style="margin-top:-20px;margin-bottom:10px;" type="error" title="暂时未开放在线聊天平台，如需要调试，请使用node开启socket服务" />
     <el-card v-if="!isShow" class="message-content">
       <p slot="header" style="padding:10px;max-height:2px!important;box-sizing:border-box;font-weight:800">在线聊天系统   在线人数:{{ num }}人</p>
       <el-alert
