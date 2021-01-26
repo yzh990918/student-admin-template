@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>天气图表</title>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.0.0/dist/echarts.min.js"></script>
+  <script
+    src="https://cdn.jsdelivr.net/gh/apache/incubator-echarts-website@asf-site/zh/asset/theme/macarons.js?_v_=20200710_1"></script>
+  <script
+    src="https://cdn.jsdelivr.net/gh/apache/incubator-echarts-website@asf-site/zh/asset/theme/shine.js?_v_=20200710_1"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+</head>
+<style>
+  *,
+  body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  .wrapper {
+    padding: 30px;
+    box-sizing: border-box;
+    width: 100%;
+    background-color: rgb(240, 242, 245);
+  }
+
+  .linechart1 {
+    padding: 16px 16px 0;
+    margin-bottom: 12px;
+    background-color: #ffffff;
+    margin-top: 25px;
+  }
+
+  .linechart {
+    padding: 16px 16px 0;
+    margin-bottom: 12px;
+    margin-top: 15px;
+    background-color: #ffffff;
+  }
+
+  .charts-cloumn-2 {
+    margin-top: 25px;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .gauge {
+    padding: 12px 12px 0;
+    margin-right: 20px;
+    background-color: #ffffff;
+  }
+
+  .linecharts2 {
+    padding: 12px 12px 0;
+    margin-right: 20px;
+    background-color: #ffffff;
+  }
+
+  .linechart3 {
+    padding: 12px 12px 0;
+    background-color: #ffffff;
+  }
+</style>
+
+<body>
+  <div class="wrapper">
+    <div class="btn-group">
+      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+        aria-expanded="false">
+        请您选择城市:
+      </button>
+      <div class="dropdown-menu">
+        <button class="dropdown-item" type="button">city1</button>
+        <button class="dropdown-item" type="button">city2</button>
+        <button class="dropdown-item" type="button">city3</button>
+        <button class="dropdown-item" type="button">city4</button>
+        <button class="dropdown-item" type="button">city5</button>
+        <button class="dropdown-item" type="button">city6</button>
+        <button class="dropdown-item" type="button">city7</button>
+        <button class="dropdown-item" type="button">city8</button>
+        <button class="dropdown-item" type="button">city9</button>
+        <button class="dropdown-item" type="button">city10</button>
+        <button class="dropdown-item" type="button">city11</button>
+
+      </div>
+    </div>
+    <div class="linechart" id="linechart" style="width: 100%;height:450px;"></div>
+    <div class="linechart1" id="linechart1" style="width: 100%;height:450px;"></div>
+    <div class="linechart1" id="linechart2" style="width: 100%;height:450px;"></div>
+    <div class="linechart1" id="linechart3" style="width: 100%;height:450px;"></div>
+    <div class="linechart1" id="linechart4" style="width: 100%;height:450px;"></div>
+    <div class="linechart1" id="linechart5" style="width: 100%;height:450px;"></div>
+    <div class="charts-cloumn-2">
+      <div class="gauge" id="gauge" style="width: 100%;height:350px;"></div>
+      <div class="linecharts2" id="linechart-2" style="width: 100%;height:350px;"></div>
+      <div class="linechart3" id="linechart-3" style="width: 100%;height:350px;"></div>
+    </div>
+  </div>
+  <script type="text/javascript">
+    function handleClick() {
+      console.log(1)
+    }
+    function random(min, max, length) {
+      let res = []
+      for (let i = 0; i < length; i++) {
+        res[i] = Math.floor(Math.random() * (max - min + 1) + min)
+      }
+      return res
+
+    }
+    function randomNum(min, max) {
+      return Math.floor(Math.random() * (max - min + 1) + min)
+    }
+    var option = {
+      title: {
+        text: 'PM10走势分析图',
+        left: 'left'
+      },
+      // x轴
+      xAxis: {
+        name: '时间轴',
+        nameLocation: 'middle',
+        nameTextStyle: {
+          padding: [10, 0, 10, 0],
+        },
+        data: [0, 5, 10, 15, 20, 25, 30],
+        // 不显示标尺
+        boundaryGap: false,
+        axisTick: {
+          show: false
+        }
+      },
+      // 网格分布
+      grid: {
+        left: 10,
+        right: 10,
+        bottom: 20,
+        top: 30,
+        containLabel: true
+      },
+      // 提示信息
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'cross'
+        },
+        padding: [5, 10],
+      },
+      yAxis: {
+        nameLocation: 'middle',
+        nameTextStyle: {
+          padding: [-5, -10, 4, -10],
+        },
+        name: 'PM10分项指数',
+        axisTick: {
+          show: false
+        }
+      },
+      // 点击可切换折线图显示的选项
+      legend: {
+        data: ['原始数据', '预测数据']
+      },
+      // 数据配置
+      series: [{
+        name: '原始数据', itemStyle: {
+          // 拐点颜色和线颜色
+          normal: {
+            color: '#FF005A',
+            lineStyle: {
+              color: '#FF005A',
+              width: 2
+            }
+          }
+        },
+        smooth: true,
+        type: 'line',
+        data: random(6, 10, 7),
+        animationDuration: 2800,
+        animationEasing: 'cubicInOut'
+      },
+      {
+        name: '预测数据',
+        smooth: true,
+        type: 'line',
+        itemStyle: {
+          normal: {
+            color: '#3888fa',
+            lineStyle: {
+              color: '#3888fa',
+              width: 2
+            },
+            areaStyle: {
+              color: '#f3f8ff'
+            }
+          }
+        },
+        data: random(6, 10, 7),
+        animationDuration: 2800,
+        animationEasing: 'quadraticOut'
+      }]
+
+    }
+    var option1 = {
+      title: {
+        text: 'PM2.5走势分析图',
+        left: 'left'
+      },
+      // x轴
+      xAxis: {
+        name: '时间轴',
+        nameLocation: 'middle',
+        nameTextStyle: {
+          padding: [10, 0, 10, 0],
+        },
+        data: [0, 5, 10, 15, 20, 25, 30],
+        // 不显示标尺
+        boundaryGap: false,
+        axisTick: {
+          show: false
+        }
+      },
+      // 网格分布
+      grid: {
+        left: 10,
+        right: 10,
+        bottom: 20,
+        top: 30,
+        containLabel: true
+      },
+      // 提示信息
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'cross'
+        },
+        padding: [5, 10],
+      },
+      yAxis: {
+        nameLocation: 'middle',
+        nameTextStyle: {
+          padding: [-5, -10, 4, -10],
+        },
+        name: 'PM2.5分项指数',
+        axisTick: {
+          show: false
+        }
+      },
+      // 点击可切换折线图显示的选项
+      legend: {
+        data: ['原始数据', '预测数据']
+      },
+      // 数据配置
+      series: [{
+        name: '原始数据', itemStyle: {
+          // 拐点颜色和线颜色
+          normal: {
+            color: '#FF005A',
+            lineStyle: {
+              color: '#FF005A',
+              width: 2
+            }
+          }
+        },
+        smooth: true,
+        type: 'line',
+        data: random(30, 45, 7),
+        animationDuration: 2800,
+        animationEasing: 'cubicInOut'
+      },
+      {
+        name: '预测数据',
+        smooth: true,
+        type: 'line',
+        itemStyle: {
+          normal: {
+            color: '#3888fa',
+            lineStyle: {
+              color: '#3888fa',
+              width: 2
+            },
+            areaStyle: {
+              color: '#f3f8ff'
+            }
+          }
+        },
+        data: random(30, 45, 7),
+        animationDuration: 2800,
+        animationEasing: 'quadraticOut'
+      }]
+    };
+    var option2 = {
+      title: {
+        text: '空气质量监控仪表盘'
+      },
+      toolbox: {
+        feature: {
+          restore: {},
+          saveAsImage: {}
+        }
+      },
+      // 提示信息
+      tooltip: {
+        formatter: '<p>空气质量<50：优<br/>100<空气质量>50：良<br/></p><br/>当前{b} : {c}',
+        axisPointer: {
+          type: 'cross'
+        },
+        padding: [5, 10],
+        textStyle: {
+          color: '#fff'
+        }
+      },
+      series: [
+        {
+          name: '空气质量',
+          min: 0,
+          max: 500,
+          type: 'gauge',
+          detail: { formatter: '{value}' },
+          data: [{ value: randomNum(0, 500), name: '空气质量' }]
+        }
+      ]
+    }
+    // 逐小时空气质量折线图
+    var option3 = {
+      title: {
+        text: '逐小时空气质量折线图'
+      },
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'cross',
+        },
+        textStyle: {
+          color: '#fff'
+        }
+      },
+      legend: {
+        data: ['空气质量']
+      },
+      toolbox: {
+        feature: {
+          saveAsImage: {}
+        }
+      },
+      grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+      },
+      xAxis: [
+        {
+          type: 'category',
+          boundaryGap: false,
+          data: ['0:00', '1:00', '2:00', '3:00', '4:00', '5:00', '6:00', '7:00', '8:00', '9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00']
+        }
+      ],
+      yAxis: [
+        {
+          type: 'value'
+        }
+      ],
+      series: [
+        {
+          name: '空气质量',
+          type: 'line',
+          areaStyle: {},
+          data: random(20, 90, 24)
+        },
+      ]
+    }
+
+    // 多天控制质量
+    var option4 = {
+      title: {
+        text: '多天空气质量预报'
+      },
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'cross',
+        }
+      },
+      legend: {
+        data: ['空气质量']
+      },
+      toolbox: {
+        feature: {
+          saveAsImage: {}
+        }
+      },
+      grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+      },
+      xAxis: [
+        {
+          type: 'category',
+          boundaryGap: false,
+          data: ['今天', '明天', '后天', '周一', '周二', '周三', '周四']
+        }
+      ],
+      yAxis: [
+        {
+          type: 'value'
+        }
+      ],
+      series: [
+        {
+          name: '空气质量',
+          type: 'line',
+          areaStyle: {},
+          data: random(20, 90, 7)
+        },
+      ]
+    }
+    // 追加四个折线图
+    var option5 = JSON.parse(JSON.stringify(option1))
+    option5.title.text = 'SO2指数监控'
+    option5.yAxis.name = 'SO2分项数据'
+    option5.series[0].data = random(4, 10, 7)
+    option5.series[1].data = random(4, 10, 7)
+
+    var option6 = JSON.parse(JSON.stringify(option1))
+    option6.title.text = 'CO指数监控'
+    option6.yAxis.name = 'CO分项数据'
+    option6.series[0].data = random(8, 17, 7)
+    option6.series[1].data = random(8, 17, 7)
+
+    var option7 = JSON.parse(JSON.stringify(option1))
+    option7.title.text = 'NO2指数监控'
+    option7.yAxis.name = 'NO2分项数据'
+    option7.series[0].data = random(4, 10, 7)
+    option7.series[1].data = random(4, 10, 7)
+
+    var option8 = JSON.parse(JSON.stringify(option1))
+    option8.title.text = 'O3指数监控'
+    option8.yAxis.name = 'O3分项数据'
+    option8.series[0].data = random(6, 17, 7)
+    option8.series[1].data = random(6, 17, 7)
+
+    setTimeout(() => {
+      // pm10折线图
+      var linechart = echarts.init(document.getElementById('linechart'), 'macarons');
+      linechart.setOption(option);
+    }, 500);
+
+    setTimeout(() => {
+      // pm2.5折线图
+      var linechart1 = echarts.init(document.getElementById('linechart1'),
+        'macarons');
+      linechart1.setOption(option1);
+    }, 500);
+
+
+    setTimeout(() => {
+      // SO2折线图
+      var linechart2 = echarts.init(document.getElementById('linechart2'),
+        'macarons');
+      linechart2.setOption(option5);
+    }, 500);
+
+
+    setTimeout(() => {
+      // CO
+      var linechart3 = echarts.init(document.getElementById('linechart3'),
+        'macarons');
+      linechart3.setOption(option6);
+    }, 500);
+
+
+    setTimeout(() => {
+      // NO2
+      var linechart4 = echarts.init(document.getElementById('linechart4'),
+        'macarons');
+      linechart4.setOption(option7);
+    }, 500);
+
+
+    setTimeout(() => {
+      // O3
+      var linechart5 = echarts.init(document.getElementById('linechart5'),
+        'macarons');
+      linechart5.setOption(option8);
+    }, 500);
+    setTimeout(() => {
+      //今日空气质量仪表图
+      var guage = echarts.init(document.getElementById('gauge'), 'macarons');
+      guage.setOption(option2)
+    }, 500);
+    // 逐小时空气质量折线图
+    setTimeout(() => {
+      var linecharts2 = echarts.init(document.getElementById('linechart-2'), 'macarons')
+      linecharts2.setOption(option3)
+    }, 500)
+    // 多天空气质量预报
+    setTimeout(() => {
+      var linecharts2 = echarts.init(document.getElementById('linechart-3'), 'shine')
+      linecharts2.setOption(option4)
+    }, 500)
+    var dropItems = document.getElementsByClassName('dropdown-item')
+    for (let i = 0; i < dropItems.length; i++) {
+      dropItems[i].addEventListener('click', () => {
+        location.reload(true)
+      })
+    }
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"
+    integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

@@ -25,7 +25,20 @@ module.exports = {
       warnings: false,
       errors: true
     },
-    proxy: 'http://localhost:8080'
+    proxy: {
+      /**
+       * 首先部署一个Vue的项目如果需要联调本地的api时，但是跨域，这个时候可以使用proxy进行代理
+       *
+       * 如果需要上线，proxy就会变得无效的，这个时候首先proxy是不需要更改的，我们只需要做一步，那就是去更改nginx的location配置，将/api代理到开发环境的url即可、要知道https是无法请求非https的请求的，所以这一步很关键
+       *
+       */
+      '/api': {
+        target: 'https://novel.yangxiansheng.top', // target表示代理的服务器url
+        // 这一步代表本地的/api会被代理到target+/下，也就是会被代理成线上的url
+        pathRewrite: {
+          '^/api': '/'
+        }
+      }}
   },
   // webpack相关配置
   configureWebpack: {
