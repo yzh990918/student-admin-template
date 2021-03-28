@@ -33,10 +33,10 @@ module.exports = {
        *
        */
       '/api': {
-        target: 'https://novel.yangxiansheng.top', // target表示代理的服务器url
+        target: 'http://localhost:8259', // target表示代理的服务器url
         // 这一步代表本地的/api会被代理到target+/下，也就是会被代理成线上的url
         pathRewrite: {
-          '^/api': '/'
+          '^/api': ''
         }
       }}
   },
