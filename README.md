@@ -84,6 +84,13 @@ npm run build
 # 开启聊天室功能，启动socket.js node应用即可
 ```
 
+6. 开启聊天室功能
+
+```bash
+# pm2启动最佳
+node socket.js
+```
+
 **当你看到这个界面，就说明你成功了🛺**
 
 ![](https://image.yangxiansheng.top/img/20210328201449.png?imglist)
@@ -120,6 +127,7 @@ npm run build
 - 学生成绩分布查询
 - 学生登录
 - 学生注册
+- 多人在线聊天室
 - 学生的删除 
 - 学生信息的修改
 - 学生成绩修改
@@ -181,6 +189,9 @@ npm run build
 
 ![](https://image.yangxiansheng.top/img/20200616132142.png?imagelist)
 
+<p style="font-size:20px;font-weight:500;">多人聊天室</p>
+
+![](https://image.yangxiansheng.top/img/20210328204003.png?imglist)
 
 ## Author 👶
 [努力中的杨先生](https://github.com/251205668)
