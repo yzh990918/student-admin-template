@@ -6,7 +6,7 @@
 
 > 在线体验地址: 由于本人ECS服务器已过期，所以不再提供线上环境访问，想要开发直接看下面的使用说明
 
-> 本项目前端框架来自于字节大佬 panjiachen 的杰作 [vue-element-admin](https://github.com/PanJiaChen/vue-element-admin),真的真的好用，赞！！！
+> 本项目前端框架来自于大佬 panjiachen 的杰作 [vue-element-admin](https://github.com/PanJiaChen/vue-element-admin),真的真的好用，赞！！！
 
 
 
