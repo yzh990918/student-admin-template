@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@kangc/v-md-editor": "^1.3.0",
-    "axios": "0.18.1",
+    "axios": "1.6.0",
     "dayjs": "^1.8.28",
     "echarts": "^4.8.0",
     "element-ui": "2.13.0",
